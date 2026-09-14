@@ -1,0 +1,39 @@
+{
+  "phase": "v0.1_validation",
+  "principle": "Evidence earns complexity.",
+  "current_runtime_dependencies": [],
+  "current_infrastructure_dependencies": [
+    "GitHub",
+    "Vercel",
+    "Supabase"
+  ],
+  "forbidden_artifacts_until_budget_change": [
+    "package.json",
+    "package-lock.json",
+    "pnpm-lock.yaml",
+    "yarn.lock",
+    "requirements.txt",
+    "pyproject.toml",
+    "Pipfile",
+    "Dockerfile",
+    "docker-compose.yml"
+  ],
+  "forbidden_code_imports_until_budget_change": [
+    "openai",
+    "anthropic",
+    "langchain",
+    "llama_index",
+    "pinecone",
+    "weaviate"
+  ],
+  "new_paid_dependencies_without_external_evidence": 0,
+  "max_company_level_priorities": 3,
+  "admission_questions": [
+    "What real user or operating problem does this dependency remove?",
+    "What repeated manual step does it replace?",
+    "What measurable outcome should improve?",
+    "What is the failure mode?",
+    "How is it removed or rolled back?",
+    "Who owns it?"
+  ]
+}
