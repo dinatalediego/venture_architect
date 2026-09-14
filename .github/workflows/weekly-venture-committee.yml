@@ -1,0 +1,28 @@
+name: Weekly Venture Committee
+on:
+  schedule:
+    - cron: '15 13 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  committee:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate committee packet
+        run: python scripts/venture_review.py --mode committee --output /tmp/committee.md
+      - name: Publish to committee thread
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          issue=$(gh issue list --state open --search '"[Venture Architect] Weekly Committee" in:title' --json number --jq '.[0].number // empty')
+          if [ -z "$issue" ]; then
+            issue=$(gh api --method POST "repos/$GITHUB_REPOSITORY/issues" -f title='[Venture Architect] Weekly Committee' -f body='Recurring investment-committee thread: evidence, decisions, kill criteria and stop-doing.' -f "assignees[]=$GITHUB_REPOSITORY_OWNER" --jq '.number')
+          fi
+          gh issue comment "$issue" --body-file /tmp/committee.md
