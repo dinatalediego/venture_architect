@@ -1,0 +1,30 @@
+{
+  "objectives": [
+    {
+      "id": "O1",
+      "objective": "Prove external B2B demand for Revenue Intelligence OS by Day 8",
+      "deadline": "2026-09-21",
+      "status": "active",
+      "key_results": [
+        {
+          "id": "KR1",
+          "metric": "targeted_accounts",
+          "target": 80,
+          "current": 0
+        },
+        {
+          "id": "KR2",
+          "metric": "qualified_conversations",
+          "target": 5,
+          "current": 0
+        },
+        {
+          "id": "KR3",
+          "metric": "decision_maker_meetings_or_paid_pilot",
+          "target": 2,
+          "current": 0
+        }
+      ]
+    }
+  ]
+}
