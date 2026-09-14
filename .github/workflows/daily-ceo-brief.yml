@@ -1,0 +1,28 @@
+name: Daily CEO Brief
+on:
+  schedule:
+    - cron: '0 13 * * 1-5'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate evidence-based brief
+        run: python scripts/venture_review.py --output /tmp/brief.md
+      - name: Update CEO Control Tower
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          issue=$(gh issue list --state open --search '"[Venture Architect] CEO Control Tower" in:title' --json number --jq '.[0].number // empty')
+          if [ -z "$issue" ]; then
+            issue=$(gh api --method POST "repos/$GITHUB_REPOSITORY/issues" -f title='[Venture Architect] CEO Control Tower' -f body='Automated operating thread. Subscribe to this issue for the daily management brief.' -f "assignees[]=$GITHUB_REPOSITORY_OWNER" --jq '.number')
+          fi
+          gh issue comment "$issue" --body-file /tmp/brief.md
