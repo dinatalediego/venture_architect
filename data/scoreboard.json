@@ -13,5 +13,25 @@
     "paid_pilots": 1,
     "sell_build_ratio_min": 1.5
   },
-  "daily": []
+  "daily": [
+    {
+      "prospects_added": 0,
+      "outbound_sent": 0,
+      "replies": 0,
+      "positive_replies": 0,
+      "qualified_conversations": 0,
+      "meetings_booked": 0,
+      "proposals_sent": 0,
+      "leads_inbound": 0,
+      "customers_won": 0,
+      "revenue_pen": 0.0,
+      "build_hours": 0.0,
+      "selling_hours": 0.0,
+      "learning_hours": 0.0,
+      "biggest_learning": "",
+      "bottleneck": "",
+      "tomorrow_one_thing": "",
+      "date": "2026-09-14"
+    }
+  ]
 }
