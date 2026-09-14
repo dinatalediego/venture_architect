@@ -1,0 +1,51 @@
+name: Software investment
+description: Propose a product/engineering change only when tied to evidence.
+title: "[INVESTMENT] "
+labels: []
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: User / problem
+      description: Who has the problem? What observable evidence exists?
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected result
+      description: What external or reliability metric should change?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Link conversation, lead, experiment, regression or production observation.
+    validations:
+      required: true
+  - type: textarea
+    id: patch
+    attributes:
+      label: Smallest patch
+    validations:
+      required: true
+  - type: textarea
+    id: failure
+    attributes:
+      label: Failure / kill criterion
+    validations:
+      required: true
+  - type: textarea
+    id: rollback
+    attributes:
+      label: Rollback strategy
+    validations:
+      required: true
+  - type: textarea
+    id: stop
+    attributes:
+      label: Stop-doing
+      description: What will explicitly remain out of scope?
+    validations:
+      required: true
