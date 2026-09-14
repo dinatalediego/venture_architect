@@ -1,0 +1,55 @@
+name: Architecture Change
+description: Propose a new dependency, framework, service, database, queue, model or infrastructure layer.
+title: "[ARCHITECTURE] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Observed problem
+      description: What real customer or operating problem is recurring?
+    validations:
+      required: true
+  - type: textarea
+    id: baseline
+    attributes:
+      label: Simpler baseline attempted
+      description: What manual/rule/SQL/statistical/deterministic solution is insufficient and why?
+    validations:
+      required: true
+  - type: textarea
+    id: mechanism
+    attributes:
+      label: Proposed complexity
+      description: Dependency/service/model/stateful component to add.
+    validations:
+      required: true
+  - type: input
+    id: metric
+    attributes:
+      label: Success metric
+    validations:
+      required: true
+  - type: textarea
+    id: failure
+    attributes:
+      label: Failure mode
+    validations:
+      required: true
+  - type: textarea
+    id: rollback
+    attributes:
+      label: Rollback / removal path
+    validations:
+      required: true
+  - type: textarea
+    id: owner
+    attributes:
+      label: Owning subsystem
+    validations:
+      required: true
+  - type: checkboxes
+    id: ai
+    attributes:
+      label: AI gate
+      options:
+        - label: If AI/ML/LLM is involved, baseline + evaluation dataset + fallback + human review are documented.
