@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Revenue Intelligence Control Room — Demo</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body class="demo-body" data-page="demo">
+  <header class="nav-shell"><nav class="nav wrap"><a class="brand" href="index.html"><span class="brand-mark">VA</span><span>Revenue Intelligence</span></a><div class="nav-links"><span class="demo-pill">SYNTHETIC DEMO</span><a class="button small" href="index.html#diagnostic">Aplicar al piloto</a></div></nav></header>
+  <main class="control-room wrap">
+    <section class="room-head"><div><div class="eyebrow">CONTROL ROOM / PROYECTO AURORA</div><h1>De “qué pasó” a “qué hacemos hoy”.</h1><p>Todos los datos de esta pantalla son sintéticos. El objetivo es demostrar el loop de decisión.</p></div><div class="period">Últimos 30 días <span>● actualizado</span></div></section>
+
+    <section class="kpi-grid">
+      <article class="kpi"><small>Leads</small><strong id="demo-leads">428</strong><span>+8.1% vs periodo ant.</span></article>
+      <article class="kpi warn"><small>Contacto útil ≤24h</small><strong>61%</strong><span>↓ 7 pp bajo objetivo</span></article>
+      <article class="kpi"><small>Citas</small><strong>54</strong><span>12.6% de leads</span></article>
+      <article class="kpi"><small>Ventas</small><strong>8</strong><span>1.9% de leads</span></article>
+      <article class="kpi"><small>Revenue atribuido</small><strong>S/ 1.42M</strong><span>demo</span></article>
+    </section>
+
+    <section class="room-grid">
+      <article class="panel span2"><div class="panel-head"><div><small>FUNNEL HEALTH</small><h2>La mayor fuga ocurre antes del contacto útil.</h2></div><span class="status amber">AMBER</span></div>
+        <div class="funnel-bars">
+          <div><span>Leads</span><i style="--w:100%"></i><b>428</b></div>
+          <div><span>Contacto útil</span><i style="--w:61%"></i><b>261</b></div>
+          <div><span>Cita</span><i style="--w:12.6%"></i><b>54</b></div>
+          <div><span>Venta</span><i style="--w:1.9%"></i><b>8</b></div>
+        </div>
+      </article>
+      <article class="panel"><div class="panel-head"><div><small>LEAKAGE</small><h2>167 leads</h2></div><span class="status red">PRIORITY</span></div><p>Sin contacto útil dentro de la ventana objetivo.</p><div class="micro"><b>Concentración</b><span>Meta Ads · 47%</span><span>Asesores 3–4 · 39%</span><span>Fin de semana · 31%</span></div></article>
+    </section>
+
+    <section class="room-grid">
+      <article class="panel"><div class="panel-head"><div><small>DECISION QUEUE</small><h2>Acciones recomendadas</h2></div><span class="status green">3</span></div>
+        <ol class="decision-list"><li><b>Reasignar leads >6h sin primer contacto</b><span>Owner: Sales Ops · hoy</span><em>Expected: -20% aging</em></li><li><b>Separar SLA por fuente</b><span>Owner: Comercial + Marketing</span><em>Expected: +contact rate</em></li><li><b>Test de guardia fin de semana</b><span>Owner: Gerencia</span><em>7-day experiment</em></li></ol>
+      </article>
+      <article class="panel"><div class="panel-head"><div><small>EXPERIMENT</small><h2>Guardia fin de semana</h2></div><span class="status amber">RUNNING</span></div><p><b>Hipótesis:</b> responder dentro de 30 min los fines de semana aumenta contacto útil ≥8 pp.</p><div class="experiment-metrics"><span><small>Baseline</small><b>49%</b></span><span><small>Target</small><b>57%</b></span><span><small>Actual</small><b>55%</b></span></div><p class="fineprint">Faltan 2 días. No promover regla todavía.</p></article>
+    </section>
+
+    <section class="panel simulator"><div><small>WHAT-IF</small><h2>¿Qué pasa si recuperamos parte del contacto perdido?</h2><p>Mueve el slider. Esto es una simulación, no una predicción.</p></div><div><label>Recuperar contacto útil <b id="sim-lift-label">10%</b><input id="sim-lift" type="range" min="0" max="30" value="10" /></label><div class="sim-output"><span>Leads recuperados <b id="sim-leads">17</b></span><span>Ventas incrementales hipotéticas <b id="sim-sales">0.5</b></span><span>Valor ilustrativo <b id="sim-value">S/ 88k</b></span></div></div></section>
+
+    <section class="demo-cta"><div><div class="eyebrow">THIS IS THE PRODUCT THESIS</div><h2>El dashboard explica. El sistema de decisión debe cerrar el loop.</h2></div><a class="button" href="index.html#diagnostic">Quiero probarlo con mi funnel</a></section>
+  </main>
+  <script src="config.js"></script><script src="assets/app.js"></script>
+</body></html>
