@@ -1,0 +1,17 @@
+{
+  "venture": "Revenue Intelligence OS",
+  "launch_start_date": "2026-09-14",
+  "day8_gate_date": "2026-09-21",
+  "currency": "PEN",
+  "targets": {
+    "prospects_added": 80,
+    "outbound_sent": 60,
+    "positive_or_qualified_conversations": 3,
+    "qualified_conversations_stretch": 5,
+    "meetings_booked": 1,
+    "meetings_stretch": 2,
+    "paid_pilots": 1,
+    "sell_build_ratio_min": 1.5
+  },
+  "daily": []
+}
