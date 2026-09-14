@@ -77,6 +77,28 @@ class KernelContractTests(unittest.TestCase):
         self.assertGreaterEqual(targets["meetings_booked"], 1)
         self.assertGreaterEqual(targets["paid_pilots"], 1)
 
+    def test_commercial_operating_contracts(self):
+        offer = self.load_json("data/offer.json")
+        objectives = self.load_json("data/objectives.json")
+        self.assertEqual(offer["duration_days"], 14)
+        self.assertGreater(offer["price_pen"], 0)
+        self.assertTrue(offer["scope"])
+        self.assertTrue(offer["not_in_scope"])
+        self.assertEqual(objectives["objectives"][0]["deadline"], "2026-09-21")
+
+    def test_prospect_workbench_is_usable(self):
+        import csv
+        with open(ROOT / "data/prospects.csv", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertGreaterEqual(len(rows), 20)
+        companies = [row["company"].strip() for row in rows]
+        self.assertEqual(len(companies), len(set(companies)), "Prospect companies must be unique")
+        for row in rows:
+            self.assertTrue(row["company"].strip())
+            self.assertIn(row["tier"], {"A", "B"})
+            self.assertTrue(row["source_url"].startswith("http"))
+            self.assertTrue(row["next_action"].strip())
+
     def test_kernel_docs_exist(self):
         for name in ["KERNEL.md", "REGRESSIONS.md", "MAINTAINERS.md", "CONSTITUTION.md"]:
             self.assertTrue((ROOT / name).exists(), name)
