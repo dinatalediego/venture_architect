@@ -1,0 +1,38 @@
+name: Validate Venture Contract
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate required product surface
+        run: |
+          test -f README.md
+          test -f CONSTITUTION.md
+          test -f app/index.html
+          test -f app/demo.html
+          test -f app/config.js
+          test -f app/assets/app.js
+          test -f app/assets/styles.css
+          test -f data/scoreboard.json
+          test -f data/experiments.json
+          python -m py_compile scripts/record_day.py scripts/venture_review.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          scoreboard=json.loads(Path("data/scoreboard.json").read_text())
+          experiments=json.loads(Path("data/experiments.json").read_text())
+          assert scoreboard["day8_gate_date"] == "2026-09-21"
+          assert len(experiments["experiments"]) >= 3
+          assert "venture-lead-capture" in Path("app/config.js").read_text()
+          print("Venture contract valid")
+          PY
