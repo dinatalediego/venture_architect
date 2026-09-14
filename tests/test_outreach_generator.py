@@ -23,16 +23,20 @@ class OutreachGeneratorTests(unittest.TestCase):
     def test_default_workbench_enforces_no_contact_policy(self):
         tmp, proc, text = self.run_generator()
         try:
-            self.assertIn("(2 drafts", proc.stdout)
-            self.assertEqual(text.count("\n## "), 2)
+            self.assertIn("(5 drafts", proc.stdout)
+            self.assertEqual(text.count("\n## "), 5)
             self.assertIn("Selene Reque Ordoñez", text)
             self.assertIn("Jackeline Palomino", text)
+            self.assertIn("Luis Hernán Guevara Espinal", text)
+            self.assertIn("Thait Chang-Say", text)
+            self.assertIn("Rodrigo Martínez", text)
 
             for blocked in [
                 "Pamela Gálvez",
                 "Luis Rafael Guillen Huamancaja",
                 "Ditrenzzo",
                 "Ciudaris",
+                "CISSAC",
             ]:
                 self.assertNotIn(f"## {blocked}", text)
                 if blocked in {"Pamela Gálvez", "Luis Rafael Guillen Huamancaja"}:
