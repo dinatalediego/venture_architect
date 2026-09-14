@@ -1,0 +1,43 @@
+{
+  "experiments": [
+    {
+      "id": "EXP-001",
+      "name": "Pain-message fit",
+      "status": "running",
+      "hypothesis": "Real-estate commercial managers will respond more to revenue leakage and action visibility than to generic BI/AI dashboard language.",
+      "riskiest_assumption": "The problem is urgent enough to earn a conversation now.",
+      "segment": "Peruvian real-estate sales teams with digital lead volume",
+      "channel": "Direct founder outreach",
+      "metric": "positive_reply_rate",
+      "target": 0.08,
+      "kill_criterion": "After 40 high-quality targeted contacts, positive reply rate is below 3% and interviews do not confirm urgency.",
+      "next_action": "Send first 20 messages using leakage framing."
+    },
+    {
+      "id": "EXP-002",
+      "name": "Founding pilot willingness-to-pay",
+      "status": "planned",
+      "hypothesis": "A qualified buyer will accept S/1,500 as a plausible 14-day pilot price if the scope is tied to measurable funnel leakage.",
+      "riskiest_assumption": "Interest converts into a budget conversation.",
+      "segment": "Qualified conversations",
+      "channel": "Discovery/demo call",
+      "metric": "price_acceptance_rate",
+      "target": 0.3,
+      "kill_criterion": "Ten qualified conversations produce zero buyers willing to discuss a paid pilot in this price range.",
+      "next_action": "Ask direct price-fit question on Day 4."
+    },
+    {
+      "id": "EXP-003",
+      "name": "Interactive demo conversion",
+      "status": "running",
+      "hypothesis": "A concrete control-room demo increases form starts and meetings relative to text-only explanation.",
+      "riskiest_assumption": "Prospects can understand the product before an integration exists.",
+      "segment": "Landing visitors",
+      "channel": "Web",
+      "metric": "visitor_to_lead_rate",
+      "target": 0.04,
+      "kill_criterion": "After 100 relevant visits, fewer than two leads/form conversations occur and interviews say the demo is unclear.",
+      "next_action": "Track page_view, demo_viewed, CTA and form_started."
+    }
+  ]
+}
