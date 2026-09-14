@@ -1,0 +1,42 @@
+name: Venture Experiment
+description: Define a falsifiable Lean Startup experiment.
+title: "[EXPERIMENT] "
+body:
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+    validations:
+      required: true
+  - type: textarea
+    id: assumption
+    attributes:
+      label: Riskiest assumption
+    validations:
+      required: true
+  - type: input
+    id: metric
+    attributes:
+      label: Success metric
+    validations:
+      required: true
+  - type: input
+    id: target
+    attributes:
+      label: Target / threshold
+    validations:
+      required: true
+  - type: textarea
+    id: kill
+    attributes:
+      label: Kill criterion
+    validations:
+      required: true
+  - type: textarea
+    id: minimum
+    attributes:
+      label: Minimum test
+  - type: input
+    id: deadline
+    attributes:
+      label: Evidence deadline
