@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "venture-architect/lead.v1",
+  "title": "Venture Architect Lead Intake v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["full_name", "company", "pain_point"],
+  "properties": {
+    "full_name": {"type": "string", "minLength": 1, "maxLength": 120},
+    "company": {"type": "string", "minLength": 1, "maxLength": 160},
+    "role": {"type": ["string", "null"], "maxLength": 120},
+    "email": {"type": ["string", "null"], "maxLength": 180},
+    "phone": {"type": ["string", "null"], "maxLength": 60},
+    "company_size": {"type": ["string", "null"], "maxLength": 60},
+    "pain_point": {"type": "string", "minLength": 1, "maxLength": 1500},
+    "monthly_leads": {"type": ["integer", "null"], "minimum": 0},
+    "monthly_sales": {"type": ["integer", "null"], "minimum": 0},
+    "crm": {"type": ["string", "null"], "maxLength": 120},
+    "source": {"type": ["string", "null"], "maxLength": 80},
+    "consent": {"type": "boolean"},
+    "utm_source": {"type": ["string", "null"], "maxLength": 180},
+    "utm_medium": {"type": ["string", "null"], "maxLength": 180},
+    "utm_campaign": {"type": ["string", "null"], "maxLength": 180},
+    "utm_content": {"type": ["string", "null"], "maxLength": 180},
+    "utm_term": {"type": ["string", "null"], "maxLength": 180},
+    "referrer": {"type": ["string", "null"], "maxLength": 1000},
+    "session_id": {"type": ["string", "null"], "maxLength": 120},
+    "page_path": {"type": ["string", "null"], "maxLength": 400},
+    "offer": {"type": ["string", "null"], "maxLength": 120},
+    "form_started_at": {"type": ["integer", "null"]}
+  },
+  "anyOf": [
+    {"required": ["email"], "properties": {"email": {"type": "string", "minLength": 3}}},
+    {"required": ["phone"], "properties": {"phone": {"type": "string", "minLength": 3}}}
+  ]
+}
