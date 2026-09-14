@@ -115,6 +115,38 @@ class KernelContractTests(unittest.TestCase):
             self.assertEqual(row["verified_at"], "2026-09-14")
             self.assertTrue(row["outreach_hypothesis"].strip())
 
+    def test_no_contact_policy_has_required_founder_exclusions(self):
+        import csv
+        with open(ROOT / "data/no_contact.csv", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        active = [row for row in rows if row["active"].lower() == "true"]
+        by_scope_value = {(row["scope"], row["match_value"]) for row in active}
+        self.assertIn(("person", "Pamela Gálvez"), by_scope_value)
+        self.assertIn(("company", "Ditrenzzo"), by_scope_value)
+        self.assertIn(("person", "Luis Rafael Guillen Huamancaja"), by_scope_value)
+        self.assertIn(("district", "Jesús María"), by_scope_value)
+
+    def test_restricted_geography_evidence_is_traceable(self):
+        import csv
+        with open(ROOT / "data/prospect_geography.csv", encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        active_jesus_maria = {
+            row["company"] for row in rows
+            if row["district"] == "Jesús María" and row["activity_status"] == "current_active"
+        }
+        for company in {
+            "Ciudaris",
+            "Ditrenzzo",
+            "Invent Inmobiliaria",
+            "V&V Grupo Inmobiliario",
+            "Abril Grupo Inmobiliario",
+            "Desarrolladora",
+        }:
+            self.assertIn(company, active_jesus_maria)
+        for row in rows:
+            self.assertTrue(row["evidence_url"].startswith("http"))
+            self.assertEqual(row["verified_at"], "2026-09-14")
+
     def test_kernel_docs_exist(self):
         for name in ["KERNEL.md", "REGRESSIONS.md", "MAINTAINERS.md", "CONSTITUTION.md"]:
             self.assertTrue((ROOT / name).exists(), name)

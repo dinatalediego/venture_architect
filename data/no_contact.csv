@@ -1,0 +1,5 @@
+scope,match_value,category,reason,active,source,added_at,notes
+person,Pamela Gálvez,influencer_or_public_personality,"Founder directive: do not prospect influencers/public-personality profiles.",true,user_directive,2026-09-14,"Person-level exclusion; Andiamo itself may be reconsidered only via a different non-excluded decision maker."
+company,Ditrenzzo,direct_competitor_of_client,"Founder directive: direct competitor of an existing client; do not prospect company or its staff.",true,user_directive,2026-09-14,"Company-wide exclusion."
+person,Luis Rafael Guillen Huamancaja,direct_competitor_of_client,"Founder directive: commercial leader at excluded direct competitor Ditrenzzo.",true,user_directive,2026-09-14,"Redundant person-level safeguard."
+district,Jesús María,restricted_geography,"Founder directive: do not prospect companies currently marketing/developing projects in Jesús María.",true,user_directive,2026-09-14,"Applies to currently active/marketed projects; historical-only activity does not automatically exclude."
