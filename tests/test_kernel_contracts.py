@@ -99,6 +99,22 @@ class KernelContractTests(unittest.TestCase):
             self.assertTrue(row["source_url"].startswith("http"))
             self.assertTrue(row["next_action"].strip())
 
+    def test_decision_maker_enrichment_is_traceable(self):
+        import csv
+        path = ROOT / "data/decision_makers.csv"
+        self.assertTrue(path.exists())
+        with open(path, encoding="utf-8") as handle:
+            rows = list(csv.DictReader(handle))
+        self.assertGreaterEqual(len(rows), 5)
+        companies = [row["company"].strip() for row in rows]
+        self.assertEqual(len(companies), len(set(companies)))
+        for row in rows:
+            self.assertTrue(row["contact_name"].strip())
+            self.assertTrue(row["role"].strip())
+            self.assertTrue(row["evidence_url"].startswith("http"))
+            self.assertEqual(row["verified_at"], "2026-09-14")
+            self.assertTrue(row["outreach_hypothesis"].strip())
+
     def test_kernel_docs_exist(self):
         for name in ["KERNEL.md", "REGRESSIONS.md", "MAINTAINERS.md", "CONSTITUTION.md"]:
             self.assertTrue((ROOT / name).exists(), name)
