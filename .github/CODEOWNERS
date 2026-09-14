@@ -1,0 +1,7 @@
+# Initial single-maintainer map. Split ownership only when recurring subsystem load justifies it.
+* @dinatalediego
+
+/app/ @dinatalediego
+/data/ @dinatalediego
+/scripts/ @dinatalediego
+/.github/ @dinatalediego

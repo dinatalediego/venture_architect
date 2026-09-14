@@ -2,11 +2,13 @@ name: Validate Venture Contract
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
-  validate:
+  kernel-contracts:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -18,6 +20,9 @@ jobs:
         run: |
           test -f README.md
           test -f CONSTITUTION.md
+          test -f KERNEL.md
+          test -f REGRESSIONS.md
+          test -f MAINTAINERS.md
           test -f app/index.html
           test -f app/demo.html
           test -f app/config.js
@@ -25,14 +30,23 @@ jobs:
           test -f app/assets/styles.css
           test -f data/scoreboard.json
           test -f data/experiments.json
+          test -f contracts/lead.v1.schema.json
+          test -f contracts/event.v1.schema.json
           python -m py_compile scripts/record_day.py scripts/venture_review.py
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          scoreboard=json.loads(Path("data/scoreboard.json").read_text())
-          experiments=json.loads(Path("data/experiments.json").read_text())
-          assert scoreboard["day8_gate_date"] == "2026-09-21"
-          assert len(experiments["experiments"]) >= 3
-          assert "venture-lead-capture" in Path("app/config.js").read_text()
-          print("Venture contract valid")
-          PY
+      - name: Run kernel contract tests
+        run: python -m unittest discover -s tests -p 'test_kernel_contracts.py' -v
+
+  production-smoke:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: kernel-contracts
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run non-destructive production smoke tests
+        env:
+          VENTURE_PROD_URL: https://venture-architect-seven.vercel.app
+        run: python -m unittest discover -s tests -p 'test_production_smoke.py' -v

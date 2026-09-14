@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "venture-architect/experiment.v1",
+  "title": "Venture Experiment v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["id", "name", "status", "hypothesis", "riskiest_assumption", "metric", "target", "kill_criterion", "next_action"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^EXP-[0-9]{3,}$"},
+    "name": {"type": "string", "minLength": 3},
+    "status": {"type": "string", "enum": ["planned", "running", "validated", "invalidated", "inconclusive", "stopped"]},
+    "hypothesis": {"type": "string", "minLength": 10},
+    "riskiest_assumption": {"type": "string", "minLength": 10},
+    "segment": {"type": ["string", "null"]},
+    "channel": {"type": ["string", "null"]},
+    "metric": {"type": "string", "minLength": 1},
+    "target": {"type": ["number", "integer"]},
+    "kill_criterion": {"type": "string", "minLength": 10},
+    "next_action": {"type": "string", "minLength": 3}
+  }
+}

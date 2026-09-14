@@ -1,0 +1,59 @@
+name: Regression
+description: Something that previously worked is now broken or degraded.
+title: "[REGRESSION] "
+labels: []
+body:
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - P0 — lead loss / PII / production unavailable
+        - P1 — tracking / scorecard / management loop
+        - P2 — degraded core UX
+        - P3 — cosmetic / non-blocking
+    validations:
+      required: true
+  - type: dropdown
+    id: invariant
+    attributes:
+      label: Invariant
+      options:
+        - R1 Acquisition path
+        - R2 Lead integrity
+        - R3 Event integrity
+        - R4 Management loop
+        - R5 Deployment
+        - R6 Decision traceability
+    validations:
+      required: true
+  - type: textarea
+    id: previously
+    attributes:
+      label: Previously working behavior
+      description: What worked before?
+    validations:
+      required: true
+  - type: textarea
+    id: now
+    attributes:
+      label: Current behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence / reproduction
+    validations:
+      required: true
+  - type: textarea
+    id: suspected
+    attributes:
+      label: Suspected change
+      description: Commit/deployment if known.
+  - type: checkboxes
+    id: response
+    attributes:
+      label: Immediate response
+      options:
+        - label: I considered revert before adding another patch.
