@@ -1,0 +1,55 @@
+name: Regression Watch
+on:
+  workflow_run:
+    workflows: ["Validate Venture Contract"]
+    types: [completed]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  open-regression:
+    if: github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Open or update regression issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          EVENT_NAME: ${{ github.event.workflow_run.event }}
+        run: |
+          title="[REGRESSION] Validate Venture Contract failed"
+          existing=$(gh issue list             --repo "$GITHUB_REPOSITORY"             --state open             --search "$title in:title"             --json number             --jq '.[0].number // empty')
+
+          body=$(cat <<EOF
+          ## Automated regression signal
+
+          **Workflow:** Validate Venture Contract
+          **Run:** $RUN_URL
+          **Run ID:** $RUN_ID
+          **Branch:** $HEAD_BRANCH
+          **SHA:** $HEAD_SHA
+          **Trigger:** $EVENT_NAME
+
+          ### Default response
+
+          1. Treat this as a regression until disproven.
+          2. Inspect the failing job/step.
+          3. Prefer revert over stacking speculative fixes when the breaking commit is clear.
+          4. Do not start unrelated feature work while a P0/P1 kernel regression is open.
+          5. Close this issue only after the required check passes again.
+
+          See `REGRESSIONS.md` and `docs/incident-runbook.md`.
+          EOF
+          )
+
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --repo "$GITHUB_REPOSITORY" --body "$body"
+          else
+            gh issue create               --repo "$GITHUB_REPOSITORY"               --title "$title"               --body "$body"               --assignee "$GITHUB_REPOSITORY_OWNER"
+          fi
