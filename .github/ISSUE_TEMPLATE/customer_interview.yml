@@ -1,0 +1,48 @@
+name: Customer Interview
+description: Record evidence from a prospect/customer conversation.
+title: "[INTERVIEW] "
+body:
+  - type: input
+    id: segment
+    attributes:
+      label: Segment / company type
+    validations:
+      required: true
+  - type: input
+    id: role
+    attributes:
+      label: Interviewee role
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem in their words
+      description: Prefer verbatim language over interpretation. Do not place private personal data here.
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current workaround / workflow
+  - type: textarea
+    id: consequence
+    attributes:
+      label: Economic or operational consequence
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: Urgency
+      options:
+        - Now / this quarter
+        - Important but not urgent
+        - Someday / curiosity
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observable next action
+      description: Meeting, anonymized data sample, introduction, proposal request, no action, etc.
+  - type: textarea
+    id: learning
+    attributes:
+      label: What changed in our belief?

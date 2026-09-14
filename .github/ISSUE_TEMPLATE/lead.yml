@@ -1,0 +1,36 @@
+name: Manual Lead / Opportunity
+description: Record a B2B opportunity that arrived outside the website.
+title: "[LEAD] "
+body:
+  - type: input
+    id: company
+    attributes:
+      label: Company
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: Contact role
+      description: Prefer role over personal contact details in this public repository.
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Stage
+      options:
+        - New
+        - Qualified conversation
+        - Meeting
+        - Proposal
+        - Won
+        - Lost / Nurture
+    validations:
+      required: true
+  - type: textarea
+    id: pain
+    attributes:
+      label: Pain / trigger
+  - type: textarea
+    id: next
+    attributes:
+      label: Next action + date

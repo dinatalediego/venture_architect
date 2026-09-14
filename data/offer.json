@@ -1,0 +1,22 @@
+{
+  "name": "Revenue Intelligence Founding Pilot",
+  "segment": "Real-estate commercial teams",
+  "promise": "Find measurable funnel leakage and install a weekly management action loop in 14 days.",
+  "price_pen": 1500,
+  "duration_days": 14,
+  "scope": [
+    "one funnel/business unit",
+    "baseline funnel",
+    "leakage map",
+    "management scorecard",
+    "prioritized action queue",
+    "one justified automation/alert",
+    "closing measurement review"
+  ],
+  "not_in_scope": [
+    "ERP replacement",
+    "multi-month custom software",
+    "unvalidated ML",
+    "unlimited integrations"
+  ]
+}
