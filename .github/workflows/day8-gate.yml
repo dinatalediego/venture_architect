@@ -1,0 +1,26 @@
+name: Day 8 Investment Gate
+on:
+  schedule:
+    - cron: '30 13 21 9 *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Guard scheduled run to 2026 gate
+        if: github.event_name == 'schedule'
+        run: test "$(date -u +%F)" = "2026-09-21"
+      - run: python scripts/venture_review.py --mode committee --output /tmp/gate.md
+      - name: Open investment gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --title '[GATE] Day 8 — INVEST / MODIFY / DEFER / STOP' --body-file /tmp/gate.md --assignee "$GITHUB_REPOSITORY_OWNER"
