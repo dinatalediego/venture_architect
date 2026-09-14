@@ -33,10 +33,14 @@ jobs:
           test -f contracts/lead.v1.schema.json
           test -f contracts/event.v1.schema.json
           python -m py_compile scripts/record_day.py scripts/venture_review.py
+      - name: Run architecture fitness gate
+        run: python scripts/architecture_fitness.py
+
       - name: Run kernel contract tests
         run: |
           python -m unittest discover -s tests -p 'test_kernel_contracts.py' -v
           python -m unittest discover -s tests -p 'test_outreach_generator.py' -v
+          python -m unittest discover -s tests -p 'test_architecture_fitness.py' -v
 
   production-smoke:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
