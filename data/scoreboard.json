@@ -15,7 +15,7 @@
   },
   "daily": [
     {
-      "prospects_added": 0,
+      "prospects_added": 1,
       "outbound_sent": 0,
       "replies": 0,
       "positive_replies": 0,
@@ -30,7 +30,7 @@
       "learning_hours": 0.0,
       "biggest_learning": "",
       "bottleneck": "",
-      "tomorrow_one_thing": "",
+      "tomorrow_one_thing": "its a first dat in seetings",
       "date": "2026-09-14"
     }
   ]
