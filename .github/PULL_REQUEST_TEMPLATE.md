@@ -51,3 +51,26 @@ How do we revert the change? What result would tell us to remove it?
 ## Stop-doing
 
 What are we explicitly *not* building as part of this change?
+
+## Complexity budget
+
+Does this change add a framework, dependency, service, database, queue, model, credential, recurring cost or new stateful component?
+
+- [ ] No
+- [ ] Yes — `data/architecture_budget.json` is updated with evidence
+
+If yes, explain:
+- repeated problem being solved;
+- simpler baseline that failed;
+- owner;
+- failure mode;
+- rollback/removal path.
+
+## AI / automation gate
+
+Does this change put AI/ML/LLM behavior in a customer or operating path?
+
+- [ ] No
+- [ ] Yes — deterministic baseline, evaluation dataset, metric, fallback and human-review policy are documented
+
+AI is not admitted merely because it is technically possible.
