@@ -1,0 +1,40 @@
+name: Decision Record
+description: Store a reversible or strategic venture decision.
+title: "[DECISION] "
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Decision question
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence available
+  - type: textarea
+    id: options
+    attributes:
+      label: Options considered
+  - type: textarea
+    id: chosen
+    attributes:
+      label: Chosen option + rationale
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected observable result
+  - type: textarea
+    id: kill
+    attributes:
+      label: Reversal / kill criterion
+  - type: input
+    id: revisit
+    attributes:
+      label: Revisit date
+  - type: textarea
+    id: stop
+    attributes:
+      label: What do we stop doing because of this decision?
