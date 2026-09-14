@@ -2,6 +2,22 @@
 
 **Venture Architect** is a capital-efficient venture operating system and its first operating company: **Revenue Intelligence OS for real-estate sales teams**.
 
+## Live MVP
+
+- **Production:** https://venture-architect-seven.vercel.app
+- **Interactive demo:** https://venture-architect-seven.vercel.app/demo.html
+- **Deployment:** Vercel production, auto-deploy from `main`
+- **Backend:** Supabase Edge Functions + Postgres
+- **Management:** GitHub Actions + Issue #1 CEO Control Tower
+- **Day-8 gate:** 2026-09-21
+
+Current technical status after go-live:
+- Landing: HTTP 200
+- Demo: HTTP 200
+- GitHub validation workflow: passing
+- GitHub → Vercel auto-deploy: verified
+- Browser events → Supabase: verified with page views, CTA click and form-start events
+
 This repository is intentionally two products in one:
 
 1. **Revenue Intelligence OS** — a sellable B2B SaaS + productized-service MVP designed to get external demand evidence in 7 days.
@@ -43,72 +59,33 @@ app/                         Static MVP deployable to Vercel
 
 data/                        Operating truth in machine-readable form
   scoreboard.json            Daily founder scoreboard
-  objectives.json            Objectives + key results
   experiments.json           Lean experiments
-  offer.json                 Offer contract
-  prospects.csv              20 verified real-estate target accounts + research routes
 
 scripts/
   venture_review.py          Drucker + Lean daily/weekly review engine
   record_day.py              Update the founder scoreboard
-  generate_outreach.py       Generate personalized outreach drafts
-  validate_repo.py           Repository contract validation
-
-docs/
-  7-day-launch.md            Exact manual execution plan
-  committee-charter.md       Venture Architect committee constitution
-  drucker-lean-os.md         Management operating system
-  sales-playbook.md          ICP, discovery, outreach, close
-  measurement-contract.md    Metrics definitions and Day-8 gate
-  architecture.md            SaaS + data architecture
-  deployment.md              Minimal deployment steps
-  day8-gate.md               Continue/pivot/stop criteria
-  moat-roadmap.md            Service -> software -> proprietary data path
-  first-hour.md              One-hour go-live + selling checklist
 
 .github/
   workflows/                 Automated control tower + manual scorecard input
-  ISSUE_TEMPLATE/            Interviews, experiments, decisions, leads
-
-supabase/                     Reproducible backend contract
 ```
-
-## Fastest path to a live company
-
-Start with [`docs/first-hour.md`](docs/first-hour.md). The repository includes safe bootstrap scripts for pushing to the canonical remote after the empty `dinatalediego/venture_architect` repository exists.
-
-The prospecting workbench is pre-seeded with 20 real companies verified from public sources on 2026-09-14. These are research targets, not permission to spam: identify the relevant commercial/marketing decision maker and personalize every founder outreach.
-
-## Local preview
-
-No framework is required for the MVP.
-
-```bash
-cd app
-python -m http.server 8080
-```
-
-Then visit `http://localhost:8080`.
 
 ## Daily operating ritual
 
-At the end of each workday:
-
-```bash
-python scripts/record_day.py \
-  --prospects-added 20 \
-  --outbound-sent 15 \
-  --replies 3 \
-  --qualified-conversations 1 \
-  --meetings-booked 1 \
-  --selling-hours 2.5 \
-  --build-hours 1 \
-  --learning "Managers respond more to leakage language than dashboard language" \
-  --bottleneck "Not enough direct conversations" \
-  --tomorrow "Call 10 sales managers before coding"
-
-python scripts/venture_review.py
-```
+Use **Actions → Record Founder Day** instead of editing the scorecard manually. Record:
+- prospects added,
+- personalized outbound,
+- replies,
+- positive replies,
+- qualified conversations,
+- meetings,
+- proposals,
+- customers won,
+- revenue,
+- selling hours,
+- build hours,
+- biggest learning,
+- bottleneck,
+- tomorrow's one thing.
 
 The management principle is deliberately strict:
 
