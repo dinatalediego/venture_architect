@@ -1,0 +1,73 @@
+name: Generate Founder Outreach Workbench
+
+on:
+  workflow_dispatch:
+    inputs:
+      tier:
+        description: Prospect tier
+        required: true
+        default: A
+        type: choice
+        options:
+          - A
+          - B
+      limit:
+        description: Maximum drafts
+        required: true
+        default: "5"
+        type: string
+      include_unenriched:
+        description: Include prospects without a verified public decision maker
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate founder workbench
+        env:
+          TIER: ${{ inputs.tier }}
+          LIMIT: ${{ inputs.limit }}
+          INCLUDE_UNENRICHED: ${{ inputs.include_unenriched }}
+        run: |
+          args=(--tier "$TIER" --limit "$LIMIT" --output artifacts/outreach_drafts.md)
+          if [ "$INCLUDE_UNENRICHED" = "true" ]; then
+            args+=(--include-unenriched)
+          fi
+          python scripts/generate_outreach.py "${args[@]}"
+
+      - name: Write run summary
+        run: |
+          {
+            echo "## Founder Outreach Workbench"
+            echo
+            echo "Generated from the canonical prospect and public decision-maker datasets."
+            echo
+            echo "- Tier: ${{ inputs.tier }}"
+            echo "- Limit: ${{ inputs.limit }}"
+            echo "- Include unenriched: ${{ inputs.include_unenriched }}"
+            echo
+            echo "Download the founder-outreach-workbench artifact from this run."
+            echo
+            echo "> Drafts are not a send queue. Verify the role and personalize one observation before sending manually."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload workbench
+        uses: actions/upload-artifact@v4
+        with:
+          name: founder-outreach-workbench
+          path: artifacts/outreach_drafts.md
+          if-no-files-found: error
+          retention-days: 7
