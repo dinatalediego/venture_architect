@@ -1,0 +1,124 @@
+name: Record Founder Day
+on:
+  workflow_dispatch:
+    inputs:
+      prospects_added:
+        description: Prospects added
+        required: true
+        default: '0'
+      outbound_sent:
+        description: Personalized outbound sent
+        required: true
+        default: '0'
+      replies:
+        description: Replies
+        required: true
+        default: '0'
+      positive_replies:
+        description: Positive replies
+        required: true
+        default: '0'
+      qualified_conversations:
+        description: Qualified conversations
+        required: true
+        default: '0'
+      meetings_booked:
+        description: Meetings booked
+        required: true
+        default: '0'
+      proposals_sent:
+        description: Proposals sent
+        required: true
+        default: '0'
+      leads_inbound:
+        description: Inbound leads
+        required: true
+        default: '0'
+      customers_won:
+        description: Customers won / paid pilots
+        required: true
+        default: '0'
+      revenue_pen:
+        description: Revenue in PEN
+        required: true
+        default: '0'
+      selling_hours:
+        description: Selling/customer hours
+        required: true
+        default: '0'
+      build_hours:
+        description: Product/build hours
+        required: true
+        default: '0'
+      learning_hours:
+        description: Explicit learning/research hours
+        required: true
+        default: '0'
+      biggest_learning:
+        description: Biggest evidence-backed learning
+        required: false
+        default: ''
+      bottleneck:
+        description: Current bottleneck
+        required: false
+        default: ''
+      tomorrow_one_thing:
+        description: Tomorrow's one thing
+        required: false
+        default: ''
+permissions:
+  contents: write
+  issues: write
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Record scorecard
+        env:
+          PROSPECTS_ADDED: ${{ inputs.prospects_added }}
+          OUTBOUND_SENT: ${{ inputs.outbound_sent }}
+          REPLIES: ${{ inputs.replies }}
+          POSITIVE_REPLIES: ${{ inputs.positive_replies }}
+          QUALIFIED_CONVERSATIONS: ${{ inputs.qualified_conversations }}
+          MEETINGS_BOOKED: ${{ inputs.meetings_booked }}
+          PROPOSALS_SENT: ${{ inputs.proposals_sent }}
+          LEADS_INBOUND: ${{ inputs.leads_inbound }}
+          CUSTOMERS_WON: ${{ inputs.customers_won }}
+          REVENUE_PEN: ${{ inputs.revenue_pen }}
+          SELLING_HOURS: ${{ inputs.selling_hours }}
+          BUILD_HOURS: ${{ inputs.build_hours }}
+          LEARNING_HOURS: ${{ inputs.learning_hours }}
+          BIGGEST_LEARNING: ${{ inputs.biggest_learning }}
+          BOTTLENECK: ${{ inputs.bottleneck }}
+          TOMORROW_ONE_THING: ${{ inputs.tomorrow_one_thing }}
+        run: |
+          python scripts/record_day.py             --prospects-added "$PROSPECTS_ADDED"             --outbound-sent "$OUTBOUND_SENT"             --replies "$REPLIES"             --positive-replies "$POSITIVE_REPLIES"             --qualified-conversations "$QUALIFIED_CONVERSATIONS"             --meetings-booked "$MEETINGS_BOOKED"             --proposals-sent "$PROPOSALS_SENT"             --leads-inbound "$LEADS_INBOUND"             --customers-won "$CUSTOMERS_WON"             --revenue-pen "$REVENUE_PEN"             --selling-hours "$SELLING_HOURS"             --build-hours "$BUILD_HOURS"             --learning-hours "$LEARNING_HOURS"             --learning "$BIGGEST_LEARNING"             --bottleneck "$BOTTLENECK"             --tomorrow "$TOMORROW_ONE_THING"
+      - name: Render management brief
+        run: python scripts/venture_review.py --output /tmp/brief.md
+      - name: Commit scorecard
+        run: |
+          git config user.name "venture-architect-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/scoreboard.json
+          if git diff --cached --quiet; then
+            echo "No scorecard changes to commit."
+          else
+            git commit -m "ops: record founder scorecard $GITHUB_RUN_ID"
+            git push
+          fi
+      - name: Post same-day management readout
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          issue=$(gh issue list --state open --search '"[Venture Architect] CEO Control Tower" in:title' --json number --jq '.[0].number // empty')
+          if [ -z "$issue" ]; then
+            issue=$(gh api --method POST "repos/$GITHUB_REPOSITORY/issues" -f title='[Venture Architect] CEO Control Tower' -f body='Automated operating thread.' -f "assignees[]=$GITHUB_REPOSITORY_OWNER" --jq '.number')
+          fi
+          gh issue comment "$issue" --body-file /tmp/brief.md
