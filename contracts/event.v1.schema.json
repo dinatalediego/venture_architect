@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "venture-architect/event.v1",
+  "title": "Venture Architect Behavioral Event v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event_name"],
+  "properties": {
+    "event_name": {
+      "type": "string",
+      "enum": ["page_view", "cta_click", "roi_calculated", "form_started", "demo_viewed", "pricing_viewed"]
+    },
+    "session_id": {"type": ["string", "null"], "maxLength": 120},
+    "page_path": {"type": ["string", "null"], "maxLength": 300},
+    "properties": {"type": "object", "maxProperties": 12}
+  }
+}
