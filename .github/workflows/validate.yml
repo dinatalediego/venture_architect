@@ -34,7 +34,9 @@ jobs:
           test -f contracts/event.v1.schema.json
           python -m py_compile scripts/record_day.py scripts/venture_review.py
       - name: Run kernel contract tests
-        run: python -m unittest discover -s tests -p 'test_kernel_contracts.py' -v
+        run: |
+          python -m unittest discover -s tests -p 'test_kernel_contracts.py' -v
+          python -m unittest discover -s tests -p 'test_outreach_generator.py' -v
 
   production-smoke:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
