@@ -25,6 +25,7 @@ jobs:
           test -f MAINTAINERS.md
           test -f app/index.html
           test -f app/demo.html
+          test -f app/company.html
           test -f app/config.js
           test -f app/assets/app.js
           test -f app/assets/styles.css
@@ -33,6 +34,7 @@ jobs:
           test -f contracts/lead.v1.schema.json
           test -f contracts/event.v1.schema.json
           python -m py_compile scripts/record_day.py scripts/venture_review.py
+          node --check app/assets/app.js
       - name: Run architecture fitness gate
         run: python scripts/architecture_fitness.py
 
