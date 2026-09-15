@@ -33,6 +33,19 @@ class ProductionSmokeTests(unittest.TestCase):
         self.assertIn("CONTROL ROOM", body)
         self.assertIn("SYNTHETIC DEMO", body)
 
+    def test_company_experience_is_reachable(self):
+        status, _, body = request(PROD + "/company.html")
+        self.assertEqual(status, 200)
+        self.assertIn("Venture Architect", body)
+        self.assertIn("TRUST CENTER", body)
+        self.assertIn("Misión", body)
+
+    def test_concierge_bundle_is_present(self):
+        status, _, body = request(PROD + "/assets/app.js")
+        self.assertEqual(status, 200)
+        self.assertIn("concierge", body)
+        self.assertIn("venture_architect_concierge", body)
+
     def test_static_client_config_is_reachable(self):
         status, _, body = request(PROD + "/config.js")
         self.assertEqual(status, 200)
