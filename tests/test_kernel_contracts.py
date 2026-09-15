@@ -147,6 +147,28 @@ class KernelContractTests(unittest.TestCase):
             self.assertTrue(row["evidence_url"].startswith("http"))
             self.assertEqual(row["verified_at"], "2026-09-14")
 
+    def test_conversational_acquisition_surface_is_transparent(self):
+        index = (ROOT / "app/index.html").read_text(encoding="utf-8")
+        company = (ROOT / "app/company.html").read_text(encoding="utf-8")
+        js = (ROOT / "app/assets/app.js").read_text(encoding="utf-8")
+        self.assertIn("js-concierge-open", index)
+        self.assertIn("EXPLORA ANTES DE DEJAR TUS DATOS", index)
+        self.assertIn("Misión", company)
+        self.assertIn("VISIÓN", company)
+        self.assertIn("TRUST CENTER", company)
+        self.assertIn("no es un humano escribiendo en vivo", js)
+        self.assertIn("venture_architect_concierge", js)
+        self.assertIn("Acepto que me contacten", js)
+        self.assertIn("postLead", js)
+
+    def test_brand_manual_exists_and_preserves_claim_discipline(self):
+        brand = (ROOT / "docs/brand-manual.md").read_text(encoding="utf-8")
+        self.assertIn("Revenue Intelligence OS", brand)
+        self.assertIn("Mission", brand)
+        self.assertIn("Vision", brand)
+        self.assertIn("Never imply", brand)
+        self.assertIn("DD monogram placeholder", brand)
+
     def test_kernel_docs_exist(self):
         for name in ["KERNEL.md", "REGRESSIONS.md", "MAINTAINERS.md", "CONSTITUTION.md"]:
             self.assertTrue((ROOT / name).exists(), name)
