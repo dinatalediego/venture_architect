@@ -1,0 +1,51 @@
+{
+  "version": "0.1.0",
+  "metrics": [
+    {
+      "id": "real_estate.lead_to_sale_conversion",
+      "label": "Lead → Venta conversion",
+      "family": "real_estate_intelligence",
+      "numerator": "canonical sales",
+      "denominator": "eligible unique leads",
+      "time_basis": "cohort or period; must be explicit",
+      "status": "definition_required_per_source",
+      "allowed_surfaces": ["chart", "report", "rag", "model_feature"]
+    },
+    {
+      "id": "real_estate.net_absorption_30d",
+      "label": "Absorción neta 30d",
+      "family": "real_estate_intelligence",
+      "formula": "net_separations_30d / stock_at_window_start",
+      "time_basis": "rolling_30d",
+      "status": "canonical_in_medallio",
+      "allowed_surfaces": ["chart", "report", "rag", "pricing_feature"]
+    },
+    {
+      "id": "capital.fx_effective_cost",
+      "label": "Costo efectivo USD/PEN",
+      "family": "personal_capital",
+      "formula": "soles_spent / net_usd_available",
+      "time_basis": "transaction_scenario",
+      "status": "implemented",
+      "allowed_surfaces": ["chart", "report", "rag"]
+    },
+    {
+      "id": "gold.expected_value_net",
+      "label": "Expected value net of execution costs",
+      "family": "gold_decision",
+      "formula": "expected_trade_pnl - spread - commission - expected_slippage",
+      "time_basis": "signal",
+      "status": "research_gate",
+      "allowed_surfaces": ["research", "rag", "promotion_gate"]
+    },
+    {
+      "id": "health.home_meal_coverage_days",
+      "label": "Home Meal Coverage Days",
+      "family": "household_readiness",
+      "formula": "feasible_meal_capacity / planned_daily_meals",
+      "time_basis": "current_snapshot",
+      "status": "product_metric",
+      "allowed_surfaces": ["chart", "report", "rag", "notification"]
+    }
+  ]
+}
