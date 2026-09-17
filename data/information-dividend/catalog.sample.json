@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-09-17T17:10:00Z",
+  "datasets": [
+    {
+      "id": "medallio_absorption",
+      "name": "MEDALLIO Absorption Mart",
+      "family": "real_estate_intelligence",
+      "status": "connected-contract",
+      "freshness": "hourly-target",
+      "grain": "project_day",
+      "privacy": "restricted",
+      "source_system": "bd_replica_crm",
+      "products": ["Power BI", "lead scoring", "pricing", "revenue intelligence"],
+      "dividend": "Repeated commercial analysis from the same canonical sales/stock history"
+    },
+    {
+      "id": "venture_funnel",
+      "name": "Revenue Intelligence Funnel",
+      "family": "real_estate_intelligence",
+      "status": "live",
+      "freshness": "event-driven",
+      "grain": "commercial_event",
+      "privacy": "internal",
+      "source_system": "venture_architect",
+      "products": ["sales diagnosis", "founder scoreboard", "B2B benchmark"],
+      "dividend": "Each prospect and customer interaction improves future diagnosis and benchmarking"
+    },
+    {
+      "id": "usdpen",
+      "name": "USD/PEN Longitudinal Series",
+      "family": "personal_capital",
+      "status": "live",
+      "freshness": "business-hours",
+      "grain": "fx_observation",
+      "privacy": "public-data",
+      "source_system": "patrimonio_en_monedas",
+      "products": ["FX scenarios", "effective-cost analysis", "forecast evaluation"],
+      "dividend": "Time itself adds observations and strengthens longitudinal evaluation"
+    },
+    {
+      "id": "gold_decision_memory",
+      "name": "Gold Decision Memory",
+      "family": "gold_decision",
+      "status": "research-paper",
+      "freshness": "scheduled-research",
+      "grain": "prediction_action_outcome",
+      "privacy": "restricted",
+      "source_system": "trading_system_oro_pro_max",
+      "products": ["backtests", "paper trading", "model evaluation", "challenger training"],
+      "dividend": "Predictions plus outcomes create proprietary training/evaluation observations"
+    },
+    {
+      "id": "kitchen_events",
+      "name": "Kitchen Event Memory",
+      "family": "household_readiness",
+      "status": "live-loop",
+      "freshness": "user-event",
+      "grain": "inventory_or_meal_event",
+      "privacy": "private",
+      "source_system": "health_for_wealth",
+      "products": ["coverage", "restock", "stockout prediction", "consumption learning"],
+      "dividend": "Normal household use creates the longitudinal data needed for better replenishment"
+    }
+  ]
+}
