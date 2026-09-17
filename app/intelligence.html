@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Information Dividend OS: cockpit gráfico, research notebook, RAG trazable y MLOps gates sobre los datasets existentes." />
+  <title>Information Dividend OS — Venture Architect</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/intelligence.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="ido-body" data-page="intelligence">
+  <header class="ido-topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">VA</span><span>Information Dividend OS</span></a>
+    <nav class="ido-tabs" aria-label="Supervisión">
+      <button data-tab="cockpit" class="active">Cockpit</button>
+      <button data-tab="research">Research Lab</button>
+      <button data-tab="rag">RAG</button>
+      <button data-tab="mlops">MLOps</button>
+    </nav>
+    <div class="ido-auth"><span id="auth-state">Sin sesión</span><button id="auth-button" class="button small">Entrar con Google</button></div>
+  </header>
+
+  <main class="ido-shell">
+    <aside class="ido-sidebar">
+      <div class="ido-side-title"><small>SISTEMAS</small><b>Tu flywheel de información</b></div>
+      <div id="system-list" class="ido-system-list"><div class="skeleton">Conecta tu sesión para cargar sistemas.</div></div>
+      <div class="ido-side-note"><small>Regla del supervisor</small><p>Dato → evidencia → análisis → decisión → acción → outcome → aprendizaje. Nada se marca “producción” sin evidencia.</p></div>
+    </aside>
+
+    <section class="ido-workspace">
+      <div class="ido-pagehead">
+        <div><div class="eyebrow">SUPERVISOR GENERAL · DATA → DECISION → OUTCOME</div><h1>Haz que tus datasets paguen dividendos informacionales.</h1><p>La misma información se observa como dashboard, se investiga como notebook, se interroga como RAG y se valida como sistema productivo.</p></div>
+        <div class="ido-health"><small>Estado del supervisor</small><strong id="supervisor-gate">AUTH REQUIRED</strong><span id="freshness-line">Sin snapshot cargado</span></div>
+      </div>
+
+      <section id="tab-cockpit" class="ido-tab active">
+        <div id="kpi-grid" class="ido-kpi-grid">
+          <article><small>Sistemas</small><strong>—</strong><span>registrados</span></article>
+          <article><small>Datasets</small><strong>—</strong><span>con contrato</span></article>
+          <article><small>Conectados</small><strong>—</strong><span>runtime</span></article>
+          <article><small>Model runs</small><strong>—</strong><span>evidencia MLOps</span></article>
+          <article><small>RAG turns</small><strong>—</strong><span>evaluables</span></article>
+        </div>
+
+        <div class="ido-grid two">
+          <article class="ido-panel">
+            <header><div><small>FLYWHEEL ECONÓMICO</small><h2>De activo de datos a aprendizaje reusable</h2></div><span class="ido-badge">LIVE REGISTRY</span></header>
+            <div class="flywheel" aria-label="Flywheel de información">
+              <div>DATA<small>observaciones</small></div><i>→</i><div>EVIDENCE<small>snapshot + provenance</small></div><i>→</i><div>ANALYZE<small>reporte / notebook</small></div><i>→</i><div>DECIDE<small>acción</small></div><i>→</i><div>OUTCOME<small>resultado</small></div><i>→</i><div>LEARN<small>nuevo activo</small></div>
+            </div>
+          </article>
+          <article class="ido-panel">
+            <header><div><small>PORTFOLIO DE DATOS</small><h2>Dividendos por dataset</h2></div></header>
+            <div id="dataset-list" class="dataset-list"><p class="muted">Sin datos.</p></div>
+          </article>
+        </div>
+
+        <div class="ido-grid two">
+          <article class="ido-panel chart-panel">
+            <header><div><small>PATRIMONIO</small><h2>USD/PEN longitudinal</h2></div><button class="ido-mini" data-load="fx_series">Actualizar</button></header>
+            <div id="fx-chart" class="ido-chart"><div class="empty-chart">Inicia sesión para cargar la serie.</div></div>
+            <div id="fx-meta" class="chart-meta"></div>
+          </article>
+          <article class="ido-panel chart-panel">
+            <header><div><small>REVENUE INTELLIGENCE</small><h2>Eventos comerciales por día</h2></div><button class="ido-mini" data-load="revenue_daily">Actualizar</button></header>
+            <div id="revenue-chart" class="ido-chart"><div class="empty-chart">Inicia sesión para cargar actividad.</div></div>
+            <div id="revenue-meta" class="chart-meta"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="tab-research" class="ido-tab">
+        <div class="notebook-toolbar"><div><b>Research Notebook</b><span>econometría + Python mental model + outputs reproducibles</span></div><select id="research-dataset"><option value="usdpen">USD/PEN</option><option value="venture_funnel">Revenue Funnel</option><option value="medallio_absorption">MEDALLIO Absorption</option></select></div>
+        <article class="notebook-cell markdown-cell"><div class="cell-index">[M]</div><div><h2>Pregunta de investigación</h2><textarea id="research-question">¿Qué cambió recientemente, qué evidencia lo demuestra y qué decisión sería razonable investigar después?</textarea></div></article>
+        <article class="notebook-cell code-cell"><div class="cell-index">[1]</div><div><pre><code id="research-code"># Contract-first analysis
+snapshot = load(dataset)
+assert snapshot.provenance
+assert snapshot.freshness
+report = describe(snapshot)
+report.validate_definitions()</code></pre><button id="run-research" class="button small">▶ Ejecutar análisis</button></div></article>
+        <article class="notebook-cell output-cell"><div class="cell-index">[out]</div><div id="research-output"><p class="muted">El output incluirá evidencia, límites y una narrativa de investigación; nunca una conclusión sin snapshot.</p></div></article>
+        <article class="ido-panel"><header><div><small>METRIC CONTRACTS</small><h2>Diccionario estadístico auditable</h2></div></header><div id="metric-table" class="metric-table"><p class="muted">Carga el supervisor para ver definiciones.</p></div></article>
+      </section>
+
+      <section id="tab-rag" class="ido-tab">
+        <div class="rag-layout">
+          <article class="ido-panel rag-chat">
+            <header><div><small>CONVERSATIONAL SUPERVISOR</small><h2>Pregunta a tus sistemas</h2></div><span class="ido-badge">CITATIONS REQUIRED</span></header>
+            <div id="rag-log" class="rag-log"><div class="rag-message assistant"><b>IDO</b><p>Pregúntame por datasets, métricas, gates, modelos, outcomes o evidencia. Si no existe soporte suficiente, debo abstenerme.</p></div></div>
+            <form id="rag-form" class="rag-input"><textarea id="rag-question" placeholder="Ej.: ¿Qué datasets ya están produciendo observaciones repetidas y cuáles aún no tienen outcome?" required></textarea><button class="button" type="submit">Preguntar</button></form>
+          </article>
+          <aside class="ido-panel evidence-panel"><header><div><small>TRACE</small><h2>Evidencia recuperada</h2></div></header><div id="rag-evidence"><p class="muted">Cada respuesta mostrará sus E1…En y su gate de calidad.</p></div><div id="rag-quality" class="quality-grid"></div></aside>
+        </div>
+      </section>
+
+      <section id="tab-mlops" class="ido-tab">
+        <div class="ido-grid two">
+          <article class="ido-panel"><header><div><small>PRODUCTION GATE</small><h2>Qué significa “está bien”</h2></div></header><div class="gate-ladder"><div><b>1 · DATA</b><span>snapshot reproducible + freshness + provenance</span></div><div><b>2 · MODEL</b><span>training snapshot + feature version + out-of-sample metrics</span></div><div><b>3 · DECISION</b><span>predicción vinculada a acción concreta</span></div><div><b>4 · OUTCOME</b><span>resultado observado después de la acción</span></div><div><b>5 · LEARNING</b><span>challenger / retraining sólo con evidencia</span></div></div></article>
+          <article class="ido-panel"><header><div><small>ESTADO</small><h2>Gates por sistema</h2></div></header><div id="gate-table" class="gate-table"><p class="muted">Sin snapshot.</p></div></article>
+        </div>
+        <article class="ido-panel"><header><div><small>MODEL REGISTRY</small><h2>Runs, versiones y pruebas</h2></div></header><div id="model-runs" class="model-runs"><p class="muted">Todavía no hay model runs registrados en el supervisor. Esto se muestra como gap, no como éxito.</p></div></article>
+      </section>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="assets/intelligence.js"></script>
+</body>
+</html>
