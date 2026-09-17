@@ -46,6 +46,14 @@ Deno.serve(async (req) => {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
+  const { data: supervisor, error: supervisorError } = await admin
+    .from('ido_supervisors')
+    .select('role,active')
+    .eq('user_id', authData.user.id)
+    .maybeSingle();
+  if (supervisorError) return json({ error: 'supervisor_authorization_unavailable' }, 500);
+  if (!supervisor?.active) return json({ error: 'supervisor_access_required' }, 403);
+
   const url = new URL(req.url);
   const view = url.searchParams.get('view') ?? 'summary';
 
@@ -189,6 +197,7 @@ Deno.serve(async (req) => {
   return json({
     generated_at: new Date().toISOString(),
     user_scope: authData.user.id,
+    supervisor_role: supervisor.role,
     registry: { systems, datasets },
     runtime: {
       revenue_intelligence: {
