@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'app/information-dividend.html'
+      - 'app/supervisor.html'
       - 'contracts/information-dividend-system.json'
       - 'data/information-dividend/**'
       - 'docs/information-dividend-os/**'
@@ -14,6 +15,7 @@ on:
   pull_request:
     paths:
       - 'app/information-dividend.html'
+      - 'app/supervisor.html'
       - 'contracts/information-dividend-system.json'
       - 'data/information-dividend/**'
       - 'docs/information-dividend-os/**'
@@ -35,10 +37,27 @@ jobs:
           node-version: 22
       - name: Validate Information Dividend contracts
         run: node tests/information-dividend-contract.test.mjs
-      - name: Validate HTML shell exists and contains core surfaces
+      - name: Validate supervisor surfaces
         run: |
           grep -q 'id="workbench"' app/information-dividend.html
           grep -q 'id="rag"' app/information-dividend.html
           grep -q 'id="mlops"' app/information-dividend.html
           grep -q 'id="decisions"' app/information-dividend.html
           grep -q 'id="reports"' app/information-dividend.html
+          grep -q 'id="workbench"' app/supervisor.html
+          grep -q 'id="rag"' app/supervisor.html
+          grep -q 'id="mlops"' app/supervisor.html
+          grep -q 'id="outcomes"' app/supervisor.html
+          grep -q 'id="reports"' app/supervisor.html
+      - name: Syntax-check live supervisor JavaScript
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          text = Path('app/supervisor.html').read_text(encoding='utf-8')
+          scripts = re.findall(r'<script>(.*?)</script>', text, flags=re.S)
+          if not scripts:
+              raise SystemExit('no inline script found')
+          Path('/tmp/ido-supervisor.js').write_text('\n'.join(scripts), encoding='utf-8')
+          PY
+          node --check /tmp/ido-supervisor.js
