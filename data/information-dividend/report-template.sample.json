@@ -1,0 +1,24 @@
+{
+  "template_id": "research_report_v1",
+  "sections": [
+    "Executive Summary",
+    "Research Question",
+    "Data and Sample",
+    "Metric Definitions",
+    "Descriptive Evidence",
+    "Econometric / Statistical Method",
+    "Results",
+    "Robustness and Diagnostics",
+    "Decision Implications",
+    "Observed Outcomes",
+    "Limitations",
+    "Reproducibility Manifest"
+  ],
+  "rules": [
+    "No number without an evidence object or explicit calculation reference",
+    "Separate description, association, prediction and causal claims",
+    "Show data cut and sample restrictions",
+    "Include model/estimator assumptions and diagnostics",
+    "State when an outcome is not yet observed"
+  ]
+}

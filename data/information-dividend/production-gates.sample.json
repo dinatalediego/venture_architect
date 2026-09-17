@@ -1,0 +1,85 @@
+{
+  "version": "0.1.0",
+  "systems": [
+    {
+      "id": "medallio",
+      "label": "MEDALLIO / Cygnus",
+      "checks": {
+        "data_contract": "pass",
+        "freshness_slo": "verify_runtime",
+        "quality_checks": "pass_partial",
+        "metric_versioning": "pass",
+        "reproducibility": "pass_partial",
+        "rag_grounding_eval": "not_started",
+        "ml_oos_eval": "in_progress",
+        "outcome_capture": "in_progress",
+        "observability": "pass_partial"
+      },
+      "gate": "EVIDENCE_BUILDING"
+    },
+    {
+      "id": "revenue_intelligence",
+      "label": "Revenue Intelligence OS",
+      "checks": {
+        "data_contract": "pass_partial",
+        "freshness_slo": "pass_partial",
+        "quality_checks": "pass_partial",
+        "metric_versioning": "pass_partial",
+        "reproducibility": "pass",
+        "rag_grounding_eval": "not_started",
+        "ml_oos_eval": "not_applicable",
+        "outcome_capture": "pass_partial",
+        "observability": "pass"
+      },
+      "gate": "LIVE_MVP"
+    },
+    {
+      "id": "patrimonio",
+      "label": "Patrimonio en Monedas",
+      "checks": {
+        "data_contract": "pass",
+        "freshness_slo": "pass",
+        "quality_checks": "pass",
+        "metric_versioning": "pass_partial",
+        "reproducibility": "pass",
+        "rag_grounding_eval": "not_started",
+        "ml_oos_eval": "pass_baseline",
+        "outcome_capture": "not_started",
+        "observability": "pass"
+      },
+      "gate": "ANALYTICS_VERIFIED"
+    },
+    {
+      "id": "goldlab",
+      "label": "Gold Decision Lab",
+      "checks": {
+        "data_contract": "pass",
+        "freshness_slo": "in_progress",
+        "quality_checks": "in_progress",
+        "metric_versioning": "pass_partial",
+        "reproducibility": "pass_partial",
+        "rag_grounding_eval": "not_started",
+        "ml_oos_eval": "required_before_promotion",
+        "outcome_capture": "paper_only",
+        "observability": "in_progress"
+      },
+      "gate": "RESEARCH_PAPER"
+    },
+    {
+      "id": "health",
+      "label": "Health for Wealth",
+      "checks": {
+        "data_contract": "pass_partial",
+        "freshness_slo": "user_event",
+        "quality_checks": "human_in_loop",
+        "metric_versioning": "pass_partial",
+        "reproducibility": "pass_partial",
+        "rag_grounding_eval": "not_started",
+        "ml_oos_eval": "not_applicable_yet",
+        "outcome_capture": "pass",
+        "observability": "pass_partial"
+      },
+      "gate": "CLOSED_LOOP_BETA"
+    }
+  ]
+}

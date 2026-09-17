@@ -1,0 +1,14 @@
+{
+  "analysis_id": "demo_real_estate_absorption_001",
+  "title": "Absorción y velocidad comercial por proyecto",
+  "dataset_snapshot_ids": ["medallio_absorption@runtime"],
+  "filters": {"window": "30d", "reconciliation_status": "RECONCILED"},
+  "variables": ["stock_inicio_ventana_30d", "separaciones_netas_30d", "ventas_30d", "absorcion_neta_30d", "meses_stock_ventas_30d"],
+  "transformations": [],
+  "method": "descriptive_panel",
+  "parameters": {"group_by": ["project", "date"]},
+  "software_environment": {"surface": "information-dividend-os", "engine": "canonical-query-adapter"},
+  "outputs": ["chart", "summary_table", "research_note"],
+  "reproducibility": "requires connected runtime snapshot",
+  "created_at": "2026-09-17T17:15:00Z"
+}

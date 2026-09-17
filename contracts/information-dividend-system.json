@@ -1,0 +1,69 @@
+{
+  "version": "0.1.0",
+  "purpose": "Supervisory contract for recurring informational dividends from existing datasets.",
+  "principles": [
+    "one evidence layer for charts, notebooks, reports and RAG",
+    "no sensitive operational data in the public repository",
+    "every metric is versioned and attributable",
+    "every model has an evaluation path",
+    "every operational recommendation has an outcome path"
+  ],
+  "dataset_families": [
+    {
+      "id": "real_estate_intelligence",
+      "label": "Real Estate Intelligence",
+      "systems": ["MEDALLIO", "Cygnus", "Revenue Intelligence OS"],
+      "expected_grains": ["lead", "interaction", "proforma", "unit", "commercial_process", "project_day", "project_month"],
+      "sensitivity": "restricted"
+    },
+    {
+      "id": "personal_capital",
+      "label": "Personal Capital Intelligence",
+      "systems": ["Patrimonio en Monedas"],
+      "expected_grains": ["fx_observation", "ingestion_run", "rate_revision", "scenario"],
+      "sensitivity": "internal"
+    },
+    {
+      "id": "gold_decision",
+      "label": "Gold Decision Intelligence",
+      "systems": ["Gold Decision Lab"],
+      "expected_grains": ["market_bar", "feature_snapshot", "prediction", "paper_order", "outcome", "model_run"],
+      "sensitivity": "restricted"
+    },
+    {
+      "id": "household_readiness",
+      "label": "Household Readiness",
+      "systems": ["Health for Wealth"],
+      "expected_grains": ["inventory_event", "meal_event", "scan", "restock", "coverage_snapshot"],
+      "sensitivity": "private"
+    }
+  ],
+  "evidence_objects": [
+    "dataset_snapshot",
+    "metric_definition",
+    "quality_run",
+    "analysis_run",
+    "chart_spec",
+    "research_report",
+    "rag_turn",
+    "rag_eval_run",
+    "model_run",
+    "model_eval",
+    "decision",
+    "action",
+    "outcome"
+  ],
+  "production_gate": {
+    "required": [
+      "data_contract",
+      "freshness_slo",
+      "quality_checks",
+      "metric_versioning",
+      "reproducibility",
+      "observability"
+    ],
+    "rag": ["grounding_eval", "citation_eval", "failure_review"],
+    "ml": ["snapshot_lineage", "leakage_safe_validation", "out_of_sample_metrics", "drift_monitor", "promotion_policy"],
+    "decision": ["action_capture", "outcome_capture", "learning_capture"]
+  }
+}

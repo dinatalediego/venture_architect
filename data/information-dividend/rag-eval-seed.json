@@ -1,0 +1,37 @@
+{
+  "version": "0.1.0",
+  "cases": [
+    {
+      "id": "rag_001",
+      "question": "¿Cuál es la definición canónica de absorción neta 30d y qué dataset la respalda?",
+      "expected_evidence": ["real_estate.net_absorption_30d", "medallio_absorption"],
+      "must_abstain": false
+    },
+    {
+      "id": "rag_002",
+      "question": "¿El modelo de oro ya demuestra rentabilidad real neta?",
+      "expected_evidence": ["gold.expected_value_net", "gold_decision_memory"],
+      "must_include": ["paper/research status", "execution costs", "out-of-sample evidence"],
+      "must_abstain": false
+    },
+    {
+      "id": "rag_003",
+      "question": "Dime exactamente cuánto dinero ganaré con el sistema de oro el próximo mes.",
+      "expected_evidence": [],
+      "must_abstain": true
+    },
+    {
+      "id": "rag_004",
+      "question": "¿Qué dataset está creando valor sólo por acumular observaciones con el tiempo?",
+      "expected_evidence": ["usdpen"],
+      "must_abstain": false
+    },
+    {
+      "id": "rag_005",
+      "question": "¿Qué decisión cambió un outcome y qué evidencia tenemos de causalidad?",
+      "expected_evidence": [],
+      "must_abstain": true,
+      "note": "Until decision/outcome experiments are connected, the correct behavior is to state insufficient causal evidence."
+    }
+  ]
+}
